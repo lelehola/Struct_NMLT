@@ -21,7 +21,7 @@ int SoNgayToiDaTrongThang(NGAY); //142
 
 int SoNgayToiDaTrongNam(NGAY); // 143
 
-int ktHople(NGAY); //144
+int ktHopLe(NGAY); //144
 
 int SoSanh(NGAY, NGAY); //145
 
@@ -45,45 +45,74 @@ NGAY KeTiep(NGAY, int); // 154
 
 NGAY TruocDo(NGAY, int); //155
 int main()
-{
-NGAY a;
-Nhap(a); 
-cout << "\nNgay vua moi nhap: ";
-Xuat(NGAY); 
+{  
+	NGAY a;
+	Nhap(a);
+	cout << "\nNgay vua nhap: ";
+	Xuat(a);
 
-int k1 = ktNhuan(a);
-if(k1==)
-	cout << "La nam nhuan";
-else
-	cout << "Khong la nam nhuan";
+	int kq1 = ktNhuan(a);
+	if (kq1 == 1)
+		cout << a.nam << " la nam nhuan" << endl;
+	else
+		cout << a.nam << " khong la nam nhuan" << endl;
 
-int SoNgayToiDaTrongThang(NGAY); //142
+	int kq2 = SoNgayToiDaTrongThang(a);
+	cout << "\nSo ngay toi da trong thang " << a.thang << " la " << kq2 << endl;
 
-int SoNgayToiDaTrongNam(NGAY); // 143
+	int kq3 = SoNgayToiDaTrongNam(a);
+	cout << "\nSo ngay toi da trong nam " << a.nam << " la " << kq3 << endl;
 
-int ktHople(NGAY); //144
+	int kq4 = ktHopLe(a);
+	if (kq4 == 1)
+		cout << a.ngay << "/" << a.thang << "/" << a.nam << " la hop le " << endl;
+	else
+		cout << a.ngay << "/" << a.thang << "/" << a.nam << " la khong hop le " << endl;
 
-int SoSanh(NGAY, NGAY); //145
+	NGAY b, d;
+	Nhap(b);
+	Nhap(d);
+	int kq5 = SoSanh(b, d);
+	if (kq5 == 1)
+		cout << "Ngay thang nam b lon hon ngay thang nam d" << endl;
+	else if (kq5 == -1)
+		cout << "Ngay thang nam d lon hon ngay thang nam b" << endl;
 
-int SoThuTuTrongNam(NGAY); //146
+	int kq6 = SoThuTuTrongNam(a);
+	cout << "So thu tu cua ngay trong nam la: " << kq6 << endl;
 
-int SoThuTu(NGAY); //147
+	int kq7 = SoThuTu(a);
+	cout << "So thu tu ngay ke tu 01/01/01 la: " << kq7 << endl;
 
-void XuatThu(NGAY); // 148
+	cout << "Thu cua ngay tuong ung la: ";
+	XuatThu(a);
 
-int KhoangCach(NGAY, NGAY); //149
+	int kq8 = KhoangCach(b, d);
+	cout << "Khoang cach giua 2 ngay la: " << kq8 << endl;
 
-NGAY TimNgay(int, int); //150
+	NGAY temp1 = TimNgay(a.nam, kq6);
+	cout << "Ngay tuong ung: " << temp1.ngay << "/" << temp1.thang << "/" << temp1.nam << endl;
+	
+	NGAY temp2 = TimNgay(kq7);
+	cout << "Ngay tuong ung: " << temp2.ngay << "/" << temp2.thang << "/" << temp2.nam << endl;
+	
+	NGAY temp3 = KeTiep(a);
+	cout << "Ngay ke tiep la: " << temp3.ngay << "/" << temp3.thang << "/" << temp3.nam << endl;
 
-NGAY TimNgay(int); // 151
+	NGAY temp4 = TruocDo(a);
+	cout << "Ngay truoc do la: " << temp4.ngay << "/" << temp4.thang << "/" << temp4.nam;
 
-NGAY KeTiep(NGAY); //152
+	int k;
+	cout << "\nNhap k: ";
+	cin >> k;
+	NGAY temp5 = KeTiep(a, k);
+	cout << "Ngay ke tiep k lan la: " << temp5.ngay << "/" << temp5.thang << "/" << temp5.nam << endl;
 
-NGAY TruocDo(NGAY); // 153
-
-NGAY KeTiep(NGAY, int); // 154
-
-NGAY TruocDo(NGAY, int); //155
+	int n;
+	cout << "\nNhap n: ";
+	cin >> n;
+	NGAY temp6 = TruocDo(a, k);
+	cout << "Ngay ke tiep k lan la: " << temp6.ngay << "/" << temp6.thang << "/" << temp6.nam;
 	return 1;
 }
 void Nhap(NGAY& a)
@@ -120,14 +149,15 @@ int SoNgayToiDaTrongNam(NGAY a)
 		return 366;
 	return 365;
 }
-int ktHople(NGAY a)
+int ktHopLe(NGAY a)
 {
-	if (a.ngay < 1 || a.thang < 1 || a.nam < 1 || a.thang > 12)
+	if (a.thang < 1 || a.thang >12 || a.nam < 1 || a.ngay < 1)
 		return 0;
 	if (a.ngay > SoNgayToiDaTrongThang(a))
 		return 0;
 	return 1;
 }
+
 int SoSanh(NGAY a, NGAY b)
 {
 	if (a.nam > b.nam)
