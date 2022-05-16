@@ -46,6 +46,44 @@ NGAY KeTiep(NGAY, int); // 154
 NGAY TruocDo(NGAY, int); //155
 int main()
 {
+NGAY a;
+Nhap(a); 
+cout << "\nNgay vua moi nhap: ";
+Xuat(NGAY); 
+
+int k1 = ktNhuan(a);
+if(k1==)
+	cout << "La nam nhuan";
+else
+	cout << "Khong la nam nhuan";
+
+int SoNgayToiDaTrongThang(NGAY); //142
+
+int SoNgayToiDaTrongNam(NGAY); // 143
+
+int ktHople(NGAY); //144
+
+int SoSanh(NGAY, NGAY); //145
+
+int SoThuTuTrongNam(NGAY); //146
+
+int SoThuTu(NGAY); //147
+
+void XuatThu(NGAY); // 148
+
+int KhoangCach(NGAY, NGAY); //149
+
+NGAY TimNgay(int, int); //150
+
+NGAY TimNgay(int); // 151
+
+NGAY KeTiep(NGAY); //152
+
+NGAY TruocDo(NGAY); // 153
+
+NGAY KeTiep(NGAY, int); // 154
+
+NGAY TruocDo(NGAY, int); //155
 	return 1;
 }
 void Nhap(NGAY& a)
