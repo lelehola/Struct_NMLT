@@ -46,7 +46,44 @@ DIEM GiaoDiem(DUONGTHANG, DUONGTHANG);
 int ktDongQui(DUONGTHANG[], int n);
 int main()
 {
+	DUONGTHANG a[1000];
+	int n;
+	Nhap(a, n);
+	cout << "/nCac duong thang vua nhap la: ";
+	Xuat(a, n);
+
+	int kq1 = ktSongSong(a, n);
+	if (kq1 == 1)
+		cout << "\nCac duong thang song song";
+	else
+		cout << "\nCac duong thang khong song song";
 	return 1;
+
+	int kq2 = ktCapSongSong(a, n);
+	if (kq2 == 1)
+		cout << "\nTon tai cap duong thang song song";
+	else
+		cout << "\nKhong ton tai cap duong thang song song";
+
+	DIEM P;
+	int kq3 = ktQuaDiem(a,n, P);
+	if (kq3 == 1)
+		cout << "\nTon tai duong thang di qua diem";
+	else
+		cout << "\nKhong ton tai duong thang di qua diem";
+
+	DUONGTHANG temp = GanDiemNhat(a, n, P);
+	cout << "\nDuong thang gan diem P nhat: ";
+	Xuat(temp);
+
+	DUONGTHANG b[100];
+	int m;
+	Nhap(b, m);
+	int kq4 = ktDongQui(b, m);
+	if (kq4 == 1)
+		cout << "Ba duong thang dong qui " << endl;
+	else
+		cout << "Ba duong thang khong dong qui " << endl;
 }
 void Nhap(DUONGTHANG P)
 {
@@ -66,6 +103,13 @@ void Nhap(DUONGTHANG a[], int& n)
 		cout << "Nhap duong thang A[" << i << "]:\n ";
 		Nhap(a[i]);
 	}
+}
+void Nhap(DIEM& a)
+{
+	cout << "\nNhap x: ";
+	cin >> a.x;
+	cout << "\nNhap y: ";
+	cin >> a.y;
 }
 void Xuat(DUONGTHANG P)
 {
