@@ -17,7 +17,7 @@ struct TamGiac
 };
 typedef struct TamGiac TAMGIAC;
 
-void Nhap(DIEM);
+void Nhap(DIEM&);
 void Nhap(DIEM[], int&); //173
 
 void Xuat(DIEM);
@@ -36,15 +36,46 @@ int ktTrung(DIEM, DIEM); //179
 int TanSuat(DIEM[], int, DIEM);
 int DemDiem(DIEM[], int);
 
-int TamGiacDocLap(DIEM[], int); //180
+void TamGiacDocLap(DIEM[], int); //180
 bool ktThuocTamGiac(DIEM, DIEM, DIEM, DIEM);
 void TamGiac(DIEM, DIEM, DIEM);
 
 int main()
 {
+	DIEM a[1000];
+	int n;
+	Nhap(a, n);
+	cout << "\nCac diem vua nhap: ";
+	Xuat(a, n);
 
-}
-void Nhap(DIEM a)
+	int kq1 = DemDiem(a, n);
+	cout << "So luong diem trong mang co hoanh do duong " << kq1 << endl;
+
+	DIEM temp1 = TungLonNhat(a, n);
+	cout << "Diem co tung do lon nhat mang: ";
+	Xuat(temp1);
+
+	DIEM temp2 = GanGocNhat(a, n);
+	cout << "Diem gan goc nhat la: ";
+	Xuat(temp2);
+
+	DIEM P, Q;
+	Nhap(P);
+	Nhap(Q);
+	GanNhauNhat(a,n, P, Q);
+	cout << "\nToa do hai diem gan nhau nhat: ";
+	Xuat(P);
+	Xuat(Q);
+
+	int kq2 = DemDiem(a, n);
+	cout << "\nCac diem rieng biet: " << kq2 << endl;
+
+	cout << "Tam giac doc lap la: ";
+	TamGiacDocLap(a, n);
+
+	return 0;
+}   
+void Nhap(DIEM &a)
 {
 	cout << "\nNhap x: ";
 	cin >> a.x;
@@ -63,8 +94,8 @@ void Nhap(DIEM a[], int& n)
 }
 void Xuat(DIEM a)
 {
-	cout << "\nToa do x:" << a.x;
-	cout << "\nToa do y: " << a.y;
+	cout << "\nx: " << a.x;
+	cout << "\ny: " << a.y;
 }
 void Xuat(DIEM a[], int n)
 {
@@ -129,29 +160,12 @@ int TanSuat(DIEM a[], int n, DIEM P)
 			dem++;
 	return dem;
 }
-int DemDiem(DIEM a[], int n)
-{
-	int dem = 0;
-	for (int i = 0; i < n; i++)
-		if (TanSuat(a, n, a[i]) == 1)
-			dem++;
-	return dem;
-}
 bool ktThuocTamGiac(DIEM a, DIEM b, DIEM c, DIEM d)
 {
-	int x1, y1, x2, y2, x3, y3, x4, y4;
-	a.x = x1;
-	a.y = y1;
-	b.x = x2;
-	b.y = y2;
-	c.x = x3;
-	c.y = y3;
-	d.x = x4;
-	d.y = y4;
-	float Sabc = (float)(1 / 2) * abs(x1 * y2 + x2 * y3 + x3 * y1 - x2 * y1 - x3 * y2 - x1 * y3);
-	float Smab = (float)(1 / 2) * abs(x4 * y1 + x1 * y2 + x2 * y4 - x1 * y4 - x2 * y1 - x4 * y2);
-	float Smbc = (float)(1 / 2) * abs(x4 * y1 + x2 * y3 + x3 * y4 - x1 * y4 - x3 * y1 - x4 * y3);
-	float Smca = (float)(1 / 2) * abs(x4 * y3 + x3 * y1 + x1 * y4 - x3 * y4 - x1 * y3 - x4 * y1);
+	float Sabc = (float)(1 / 2) * abs(a.x * b.y + b.x * c.y + c.x * a.y - b.x * a.y - c.x * b.y - a.x * c.y);
+	float Smab = (float)(1 / 2) * abs(d.x * a.y + a.x * b.y + b.x * d.y - a.x * d.y - b.x * a.y - d.x * b.y);
+	float Smbc = (float)(1 / 2) * abs(d.x * a.y + a.x * c.y + c.x * d.y - a.x * d.y - c.x * a.y - d.x * c.y);
+	float Smca = (float)(1 / 2) * abs(d.x * c.y + c.x * a.y + a.x * d.y - c.x * d.y - a.x * c.y - d.x * a.y);
 	int tong = Smab + Smbc + Smca;
 	if (Sabc == tong)
 	{
@@ -161,12 +175,11 @@ bool ktThuocTamGiac(DIEM a, DIEM b, DIEM c, DIEM d)
 }
 void TamGiac(DIEM a, DIEM b, DIEM c)
 {
-	cout << "\nTam giac: ";
 	cout << "\nDiem a: " << "(" << a.x << ", " << a.y << ")";
 	cout << "\nDiem b: " << "(" << b.x << ", " << b.y << ")";
 	cout << "\nDiem c: " << "(" << c.x << ", " << c.y << ")";
 }
-int TamGiacDocLap(DIEM a[], int n)
+void TamGiacDocLap(DIEM a[], int n)
 {
 	for (int i = 0; i < n - 3; i++)  // diem dau tien
 		for (int j = i + 1; j < n - 2; j++) // diem thu hai
